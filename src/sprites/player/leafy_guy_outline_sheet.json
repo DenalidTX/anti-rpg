@@ -1,0 +1,268 @@
+{ "frames": {
+   "leafy_guy #step 0.ase": {
+    "frame": { "x": 0, "y": 0, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 150
+   },
+   "leafy_guy #step 1.ase": {
+    "frame": { "x": 30, "y": 0, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 150
+   },
+   "leafy_guy #step 2.ase": {
+    "frame": { "x": 60, "y": 0, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 100
+   },
+   "leafy_guy #step 3.ase": {
+    "frame": { "x": 90, "y": 0, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 100
+   },
+   "leafy_guy #step 4.ase": {
+    "frame": { "x": 120, "y": 0, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 100
+   },
+   "leafy_guy #turn 0.ase": {
+    "frame": { "x": 0, "y": 24, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 300
+   },
+   "leafy_guy #turn 1.ase": {
+    "frame": { "x": 30, "y": 24, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 300
+   },
+   "leafy_guy #turn 2.ase": {
+    "frame": { "x": 60, "y": 24, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 300
+   },
+   "leafy_guy #turn 3.ase": {
+    "frame": { "x": 90, "y": 24, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 300
+   },
+   "leafy_guy #flop 0.ase": {
+    "frame": { "x": 0, "y": 48, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 120
+   },
+   "leafy_guy #flop 1.ase": {
+    "frame": { "x": 30, "y": 48, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 120
+   },
+   "leafy_guy #flop 2.ase": {
+    "frame": { "x": 60, "y": 48, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 120
+   },
+   "leafy_guy #flop 3.ase": {
+    "frame": { "x": 90, "y": 48, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 120
+   },
+   "leafy_guy #Jump 0.ase": {
+    "frame": { "x": 0, "y": 72, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 500
+   },
+   "leafy_guy #Jump 1.ase": {
+    "frame": { "x": 30, "y": 72, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 120
+   },
+   "leafy_guy #Jump 2.ase": {
+    "frame": { "x": 60, "y": 72, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 240
+   },
+   "leafy_guy #Jump 3.ase": {
+    "frame": { "x": 90, "y": 72, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 960
+   },
+   "leafy_guy #Jump 4.ase": {
+    "frame": { "x": 120, "y": 72, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 240
+   },
+   "leafy_guy #Jump 5.ase": {
+    "frame": { "x": 150, "y": 72, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 120
+   },
+   "leafy_guy #Jump 6.ase": {
+    "frame": { "x": 180, "y": 72, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 120
+   },
+   "leafy_guy #Jump 7.ase": {
+    "frame": { "x": 210, "y": 72, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 500
+   },
+   "leafy_guy #run 0.ase": {
+    "frame": { "x": 0, "y": 96, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 75
+   },
+   "leafy_guy #run 1.ase": {
+    "frame": { "x": 30, "y": 96, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 75
+   },
+   "leafy_guy #run 2.ase": {
+    "frame": { "x": 60, "y": 96, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 75
+   },
+   "leafy_guy #run 3.ase": {
+    "frame": { "x": 90, "y": 96, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 75
+   },
+   "leafy_guy #run 4.ase": {
+    "frame": { "x": 120, "y": 96, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 75
+   },
+   "leafy_guy #run 5.ase": {
+    "frame": { "x": 150, "y": 96, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 75
+   },
+   "leafy_guy #run 6.ase": {
+    "frame": { "x": 180, "y": 96, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 75
+   },
+   "leafy_guy #run 7.ase": {
+    "frame": { "x": 210, "y": 96, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 75
+   },
+   "leafy_guy #run 8.ase": {
+    "frame": { "x": 240, "y": 96, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 75
+   },
+   "leafy_guy #run 9.ase": {
+    "frame": { "x": 270, "y": 96, "w": 30, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 22 },
+    "sourceSize": { "w": 28, "h": 22 },
+    "duration": 75
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.34.1-x64",
+  "image": "leafy_guy_outline_sheet.png",
+  "format": "RGBA8888",
+  "size": { "w": 300, "h": 120 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "step", "from": 0, "to": 4, "direction": "forward" },
+   { "name": "turn", "from": 5, "to": 8, "direction": "forward" },
+   { "name": "flop", "from": 9, "to": 12, "direction": "forward" },
+   { "name": "Jump", "from": 13, "to": 20, "direction": "forward" },
+   { "name": "run", "from": 22, "to": 31, "direction": "forward" }
+  ],
+  "slices": [
+  ]
+ }
+}
