@@ -1,2 +1,3 @@
-# anti-rpg
-Entry for Chill Vibes Game Jam 2022
+# Anti-RPG
+
+Those pesky heroes are at it again! It's all well and good killing zombies and skeletons, but the apparently they just want the "experience" of killing everything along the way. If only there was some way to deter them...
