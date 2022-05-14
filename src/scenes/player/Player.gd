@@ -1,9 +1,11 @@
-extends Area2D
+extends KinematicBody2D
 
 export var speed = 200 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 var idle_time = 0 # Time since last movement/animation.
 var idle_animation_check = 100 # Time to wait before maybe animating "bored"
+
+onready var initial_pos = get_pos()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,10 +37,10 @@ func _process(delta):
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
+		velocity *= delta
 		
-		position += velocity * delta
-		position.x = clamp(position.x, 0, screen_size.x)
-		position.y = clamp(position.y, 0, screen_size.y)
+		# Conveniently, this stops moving when we stop pressing.
+		move_and_collide(velocity)
 	
 		idle_time = 0
 	else:
@@ -52,3 +54,11 @@ func _process(delta):
 
 func _on_PlayerSprite_animation_finished():
 	$PlayerSprite.play("Idle")
+
+
+func _on_Player_body_entered():
+	pass # Replace with function body.
+
+func get_pos():
+	return position
+	
