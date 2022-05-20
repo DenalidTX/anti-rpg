@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/environment/dark_rocky_forest_tiles.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Play/PitControl.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Play/ControlScript.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 48, 48 )
+
+[node name="Control" type="Control"]
+anchor_top = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 800.0
+margin_bottom = 96.0
+mouse_filter = 2
+color = Color( 0.188235, 0.188235, 0.188235, 0.392157 )
+
+[node name="PitControl" type="TextureRect" parent="."]
+margin_left = 32.0
+margin_top = 24.0
+margin_right = 80.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 16, 16 )
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = SubResource( 1 )
+script = ExtResource( 2 )
