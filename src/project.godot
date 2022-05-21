@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Basic Demo"
-run/main_scene="res://scenes/Play/Editor.tscn"
+run/main_scene="res://scenes/Play/MainScene.tscn"
 config/icon="res://icon.png"
 
 [display]
