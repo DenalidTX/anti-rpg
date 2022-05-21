@@ -426,7 +426,7 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 0, 1610612746, 0, 524300, -1610612733, 0 )
+tile_data = PoolIntArray( 0, 1610612746, 0 )
 
 [node name="Stones 5" type="TileMap" parent="Rocks/Fire Pit"]
 position = Vector2( 708.018, 482.886 )

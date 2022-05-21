@@ -3,7 +3,7 @@ extends KinematicBody2D
 var path = null
 var speed = 100
 
-var last_move = null
+var last_path_target = null
 
 var rng = RandomNumberGenerator.new()
 
@@ -46,6 +46,9 @@ func _process(delta):
             velocity = direction * distance_to_next_point
             path.remove(0)
             move_done = true
+            $EnemySprite.play("Idle")
+            $EnemySprite.scale.x = 0.5 * 0.75
+            $EnemySprite.scale.y = 0.5 * 0.75
         else:
             velocity = direction * speed
             
@@ -55,7 +58,7 @@ func _process(delta):
         var old_position = position
         move_and_slide(velocity)
         var new_position = position
-        last_move = new_position - old_position
+        var last_move = new_position - old_position
         
         
         # Try to unstick if possible.
@@ -69,16 +72,26 @@ func _process(delta):
                     move_and_slide(Vector2(0, direction.y) * speed * 25.0)
                 elif move_to_try == 2:
                     move_and_slide(Vector2(direction.x, 0) * speed * 25.0)
-    else:
-        $EnemySprite.play("Idle")
-        $EnemySprite.scale.x = 0.5 * 0.75
-        $EnemySprite.scale.y = 0.5 * 0.75
+    #else:
+    #    $EnemySprite.play("Idle")
+    #    $EnemySprite.scale.x = 0.5 * 0.75
+    #    $EnemySprite.scale.y = 0.5 * 0.75
 
 func get_position():
     return $EnemySprite.position
 
 func set_path(new_path: Array):
-    self.path = [] + new_path
+    var path_set = false
+    if new_path != null and new_path.size() > 0:
+        var new_path_target = new_path[new_path.size() - 1]
+        if new_path_target != last_path_target:
+            path = [] + new_path
+            last_path_target = new_path_target
+            path_set = true
+    if !path_set:
+        $EnemySprite.play("Thinking")
+        $EnemySprite.scale.x = 0.5 * 0.75
+        $EnemySprite.scale.y = 0.5 * 0.75
     
 func needs_path():
     return path == null || path.size() == 0

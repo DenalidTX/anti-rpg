@@ -1,6 +1,6 @@
 extends Node
 
-var update_delay = 10
+var update_delay = 50
 
 var rng = RandomNumberGenerator.new()
 
@@ -29,6 +29,8 @@ func update_paths():
     
         for enemy in enemies:
             if not pathing_targets.empty() and enemy.needs_path():
-                var next_point = rng.randi_range(0, pathing_targets.size() - 1)
-                var path = enemy_nav.get_simple_path(enemy.position, pathing_targets[next_point])
+                var next_point = rng.randi_range(0, pathing_targets.size()+2)
+                var path = [] # There's a chance we'll just idle.
+                if next_point < pathing_targets.size():
+                    path = enemy_nav.get_simple_path(enemy.position, pathing_targets[next_point])
                 enemy.set_path(path)

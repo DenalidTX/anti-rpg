@@ -78,4 +78,8 @@ func _on_PlacementArea_gui_input(event):
             pit_image.rect_position = get_viewport().get_mouse_position()
             pit_image.rect_position.x -= 24 # Adjust for mouse being centered.
             pit_image.rect_position.y -= 24 # Adjust for mouse being centered.
+            
+            # Add collision box.
+            $PitNode/StaticBody2D/PitCollisionShape.position = pit_image.position
+            $PitNode/StaticBody2D/PitCollisionShape.disabled = false
             Input.set_custom_mouse_cursor(null)
