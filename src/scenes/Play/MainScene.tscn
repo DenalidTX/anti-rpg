@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/Play/EnemyManager.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 24 )
+extents = Vector2( 16, 16 )
 
 [node name="MainScene" type="Node"]
 script = ExtResource( 4 )
@@ -22,23 +22,13 @@ z_index = 1
 [node name="StaticBody2D" type="StaticBody2D" parent="PitNode"]
 
 [node name="PitCollisionShape" type="CollisionShape2D" parent="PitNode/StaticBody2D"]
-position = Vector2( 687, 464 )
+position = Vector2( 688, 464 )
 shape = SubResource( 1 )
 disabled = true
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 76, 37 )
 z_index = 1
-
-[node name="PlacementArea" type="Control" parent="."]
-visible = false
-margin_right = 800.0
-margin_bottom = 608.0
-mouse_filter = 1
-
-[node name="Control" parent="." instance=ExtResource( 1 )]
-margin_top = 32.0
-margin_bottom = 8.0
 
 [node name="PathEnd1" type="Position2D" parent="."]
 position = Vector2( 42, 163 )
@@ -58,5 +48,14 @@ script = ExtResource( 5 )
 [node name="Enemy1" parent="." instance=ExtResource( 6 )]
 position = Vector2( 780, 268 )
 z_index = 1
+
+[node name="PlacementArea" type="Control" parent="."]
+margin_right = 800.0
+margin_bottom = 608.0
+mouse_filter = 1
+
+[node name="Control" parent="." instance=ExtResource( 1 )]
+margin_top = 32.0
+margin_bottom = 8.0
 
 [connection signal="gui_input" from="PlacementArea" to="." method="_on_PlacementArea_gui_input"]

@@ -72,7 +72,7 @@ func on_start_round():
 func _on_PlacementArea_gui_input(event):
     if event is InputEventMouseButton && event.pressed:
         if pit_image != null and place_mode == PlaceModes.PitTrap:
-            #print("Received placement event.")
+            print("Received placement event.")
             place_mode = PlaceModes.None
             $PitNode.add_child(pit_image)
             pit_image.rect_position = get_viewport().get_mouse_position()
@@ -80,6 +80,6 @@ func _on_PlacementArea_gui_input(event):
             pit_image.rect_position.y -= 24 # Adjust for mouse being centered.
             
             # Add collision box.
-            $PitNode/StaticBody2D/PitCollisionShape.position = pit_image.position
+            $PitNode/StaticBody2D/PitCollisionShape.position = get_viewport().get_mouse_position()
             $PitNode/StaticBody2D/PitCollisionShape.disabled = false
             Input.set_custom_mouse_cursor(null)
