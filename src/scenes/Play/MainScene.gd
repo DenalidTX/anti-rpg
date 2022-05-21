@@ -61,7 +61,7 @@ func on_start_round():
     active_enemies.append($Enemy1)
     
     # Get the navigation overlay for enemy pathfinding.
-    var enemy_nav : Navigation2D = $LevelMap.get_full_nav()
+    var enemy_nav : Navigation2D = $LevelMap.get_enemy_path_nav()
     var pathing_targets = [
             $PathEnd1.position, 
             $PathEnd2.position, 

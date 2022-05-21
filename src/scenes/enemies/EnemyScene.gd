@@ -64,7 +64,7 @@ func _process(delta):
             and abs(last_move.y) < abs(velocity.y * delta / 2.0):
                 var move_to_try = rng.randi_range(0, 3)
                 if move_to_try == 0:
-                    move_and_slide(Vector2(-direction.x, -direction.y) * speed)
+                    move_and_slide(Vector2(-direction.x, -direction.y) * speed * 25.0)
                 elif move_to_try == 1:
                     move_and_slide(Vector2(0, direction.y) * speed * 25.0)
                 elif move_to_try == 2:
