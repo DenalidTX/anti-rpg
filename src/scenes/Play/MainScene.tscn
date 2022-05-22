@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Play/PlayerSetup.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/map/MainMap.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/Play/EnemyObject.gd" type="Script" id=5]
 [ext_resource path="res://scenes/enemies/Enemy1.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Play/EnemyManager.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Play/PathTree.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
@@ -29,14 +30,65 @@ disabled = true
 position = Vector2( 76, 37 )
 z_index = 1
 
-[node name="PathEnd1" type="Position2D" parent="."]
+[node name="PathTree" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="Path_Start" type="Position2D" parent="PathTree"]
+position = Vector2( 785, 273 )
+
+[node name="Path_Right" type="Position2D" parent="PathTree"]
+position = Vector2( 768, 272 )
+
+[node name="Path_RightTop" type="Position2D" parent="PathTree"]
+position = Vector2( 768, 80 )
+
+[node name="Path_TopRight" type="Position2D" parent="PathTree"]
+position = Vector2( 624, 48 )
+
+[node name="Path_Top" type="Position2D" parent="PathTree"]
+position = Vector2( 400, 112 )
+
+[node name="Path_TopLeft" type="Position2D" parent="PathTree"]
+position = Vector2( 208, 16 )
+
+[node name="Path_Fork" type="Position2D" parent="PathTree"]
+position = Vector2( 680, 257 )
+
+[node name="Path_CampsiteTop" type="Position2D" parent="PathTree"]
+position = Vector2( 780, 416 )
+
+[node name="Path_CampsiteBottomRight" type="Position2D" parent="PathTree"]
+position = Vector2( 752, 562 )
+
+[node name="Path_CampsiteBottomLeft" type="Position2D" parent="PathTree"]
+position = Vector2( 640, 576 )
+
+[node name="Path_Left" type="Position2D" parent="PathTree"]
 position = Vector2( 42, 163 )
 
-[node name="PathEnd2" type="Position2D" parent="."]
-position = Vector2( 436, 562 )
+[node name="Path_EndLeft" type="Position2D" parent="PathTree"]
+position = Vector2( 16, 144 )
 
-[node name="PathFork" type="Position2D" parent="."]
-position = Vector2( 680, 257 )
+[node name="Path_Bottom" type="Position2D" parent="PathTree"]
+position = Vector2( 432, 584 )
+
+[node name="Path_EndBottom" type="Position2D" parent="PathTree"]
+position = Vector2( 416, 592 )
+
+[node name="Path_ClearingTopRight" type="Position2D" parent="PathTree"]
+position = Vector2( 464, 336 )
+
+[node name="Path_ClearingTop" type="Position2D" parent="PathTree"]
+position = Vector2( 304, 280 )
+
+[node name="Path_ClearingLeft" type="Position2D" parent="PathTree"]
+position = Vector2( 64, 400 )
+
+[node name="Path_CampsiteTopLeft" type="Position2D" parent="PathTree"]
+position = Vector2( 576, 400 )
+
+[node name="Path_ClearingCenter" type="Position2D" parent="PathTree"]
+position = Vector2( 320, 416 )
 
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource( 7 )

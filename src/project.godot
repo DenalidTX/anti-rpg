@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Object",
+"class": "PathNodeType",
+"language": "GDScript",
+"path": "res://util/PathNode.gd"
+} ]
+_global_script_class_icons={
+"PathNodeType": ""
+}
+
 [application]
 
 config/name="Basic Demo"

@@ -22,6 +22,7 @@ var path = null
 
 # This prevents us "walking" to where we already are.
 var last_path_target = null
+var last_path_position = null
 
 # This is used to work around obstacles.
 var bouncing = 0
@@ -82,7 +83,7 @@ func do_move(delta):
             var direction = position.direction_to(path[0])
             var velocity = direction * distance_to_walk
             if distance_to_walk >= distance_to_next_point:
-                # The player get to the next point
+                # The player reaches the next point
                 velocity = direction * distance_to_next_point
                 path.remove(0)
                 move_done = true
@@ -90,7 +91,7 @@ func do_move(delta):
             else:
                 velocity = direction * speed
                 
-            # Using movee_and_collide causes enemies to get stuck badly.
+            # Using move_and_collide causes enemies to get stuck badly.
             # This lets them unstick.
             
             var old_position = position
@@ -115,15 +116,22 @@ func do_move(delta):
                     bouncing = 10
 
 func get_position():
-    return $EnemySprite.position
+    return position
+
+func set_position(new_position : Vector2):
+    position = new_position
+    
+func set_next_path_target(next_path_target, new_path):
+    last_path_target = next_path_target
+    set_path(new_path)
 
 func set_path(new_path: Array):
     var path_set = false
     if new_path != null and new_path.size() > 0:
         var new_path_target = new_path[new_path.size() - 1]
-        if new_path_target != last_path_target:
+        if new_path_target != last_path_position:
             path = [] + new_path
-            last_path_target = new_path_target
+            last_path_position = new_path_target
             path_set = true
     if !path_set:
         animate_think()

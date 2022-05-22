@@ -29,6 +29,8 @@ var active_enemies = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    # TODO: Use this.
+    var path_graph = $PathTree.create_default_graph()
     pass
 
 # Called by controls to set the current ghost image and placeable object.
@@ -62,12 +64,8 @@ func on_start_round():
     
     # Get the navigation overlay for enemy pathfinding.
     var enemy_nav : Navigation2D = $LevelMap.get_enemy_path_nav()
-    var pathing_targets = [
-            $PathEnd1.position, 
-            $PathEnd2.position, 
-            $PathFork.position
-        ]
-    $EnemyManager.initialize(active_enemies, enemy_nav, pathing_targets)
+    var path_graph = $PathTree.create_default_graph()
+    $EnemyManager.initialize(active_enemies, enemy_nav, path_graph)
 
 func _on_PlacementArea_gui_input(event):
     if event is InputEventMouseButton && event.pressed:
