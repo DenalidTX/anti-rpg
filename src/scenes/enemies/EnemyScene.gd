@@ -1,81 +1,118 @@
 extends KinematicBody2D
 
-var path = null
+# Movement speed. This is up here so that it's easily identified and adjusted.
 var speed = 100
 
+# This differentiates movement from other actions.
+enum Mode {
+    Normal = 0,
+    Falling = 1,
+    Disabled = 999
+}
+var current_mode = Mode.Normal
+
+var fall_position = null
+var fall_size_adjust = 1
+var fall_pause = 0
+
+# This is the current path, if any. Unfortunately that means
+# that the enemy holds state from frame to frame instead of
+# having a separate game state. Probably should change that.
+var path = null
+
+# This prevents us "walking" to where we already are.
 var last_path_target = null
+
+# This is used to work around obstacles.
+var bouncing = 0
+var bounce_velocity = null
 
 var rng = RandomNumberGenerator.new()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-    pass # Replace with function body.
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
+    if current_mode == Mode.Normal:
+        do_move(delta)
+    elif current_mode == Mode.Falling:
+        animate_fall()
+        if position != fall_position:
+            var direction = position.direction_to(fall_position)
+            var new_velocity = direction
+
+            var distance = position.distance_to(fall_position)
+            if distance < 1:
+                new_velocity *= distance
+            fall_size_adjust *= 0.95
+            move_and_collide(new_velocity)
+        elif fall_pause < 10:
+            fall_pause += 1
+        elif fall_size_adjust > 0.2:
+            fall_size_adjust *= 0.95
+        else:
+            # TODO: Add score or something.
+            current_mode = Mode.Disabled
+            find_parent("MainScene").get_node("Enemies").remove_child(self)
+
+func do_move(delta):
     
-    # Credit: The pathfinding logic was copied from:
+    # Credit: I started with the below tutorial, but by the time I was done
+    # the logic was completely different because collision avoidance doesn't
+    # really work with the pathfinding system. XD
     #   https://www.davidepesce.com/2019/11/19/godot-tutorial-how-to-use-navigation2d-for-pathfinding/
+    
     # Calculate the movement distance for this frame
     var distance_to_walk = speed * delta
     
     # Move the player along the path until he has run out of movement or the path ends.
     if path != null and distance_to_walk > 0 and path.size() > 0:
-        var move_done = false
-        # Get this first so that we can play the right animation.
-        var distance_to_next_point = position.distance_to(path[0])
-        
-        if distance_to_next_point > 0:
-            # Update animation direction.
-            if position.x < path[0].x:
-                $EnemySprite.play("Walk Right")
-            else:
-                $EnemySprite.play("Walk Left")
-            # Also update size b/c the sprite sheets don't match.
-            $EnemySprite.scale.x = 0.5
-            $EnemySprite.scale.y = 0.5
-        else:
-            $EnemySprite.play("Idle")
-            $EnemySprite.scale.x = 0.5 * 0.75
-            $EnemySprite.scale.y = 0.5 * 0.75
-        
-        var direction = position.direction_to(path[0])
-        var velocity = direction * distance_to_walk
-        if distance_to_walk >= distance_to_next_point:
-            # The player get to the next point
-            velocity = direction * distance_to_next_point
-            path.remove(0)
-            move_done = true
-            $EnemySprite.play("Idle")
-            $EnemySprite.scale.x = 0.5 * 0.75
-            $EnemySprite.scale.y = 0.5 * 0.75
-        else:
-            velocity = direction * speed
+        if bounce_velocity != null and bouncing > 0:
+            move_and_slide(bounce_velocity)
+            bouncing -= 1
             
-        # Using movee_and_collide causes enemies to get stuck badly.
-        # This lets them unstick.
-        
-        var old_position = position
-        move_and_slide(velocity)
-        var new_position = position
-        var last_move = new_position - old_position
-        
-        
-        # Try to unstick if possible.
-        if !move_done \
-            and abs(last_move.x) < abs(velocity.x * delta / 2.0) \
-            and abs(last_move.y) < abs(velocity.y * delta / 2.0):
-                var move_to_try = rng.randi_range(0, 3)
-                if move_to_try == 0:
-                    move_and_slide(Vector2(-direction.x, -direction.y) * speed * 25.0)
-                elif move_to_try == 1:
-                    move_and_slide(Vector2(0, direction.y) * speed * 25.0)
-                elif move_to_try == 2:
-                    move_and_slide(Vector2(direction.x, 0) * speed * 25.0)
-    #else:
-    #    $EnemySprite.play("Idle")
-    #    $EnemySprite.scale.x = 0.5 * 0.75
-    #    $EnemySprite.scale.y = 0.5 * 0.75
+        else:
+            var move_done = false
+            # Get this first so that we can play the right animation.
+            var distance_to_next_point = position.distance_to(path[0])
+            
+            if distance_to_next_point > 0:
+                # Update animation direction.
+                if position.x < path[0].x: animate_right()
+                else: animate_left()
+            
+            var direction = position.direction_to(path[0])
+            var velocity = direction * distance_to_walk
+            if distance_to_walk >= distance_to_next_point:
+                # The player get to the next point
+                velocity = direction * distance_to_next_point
+                path.remove(0)
+                move_done = true
+                animate_idle()
+            else:
+                velocity = direction * speed
+                
+            # Using movee_and_collide causes enemies to get stuck badly.
+            # This lets them unstick.
+            
+            var old_position = position
+            move_and_slide(velocity)
+            var new_position = position
+            var last_move = new_position - old_position
+            
+            var collision : KinematicCollision2D
+            collision = get_last_slide_collision()
+            
+            if collision != null:
+                print("Collided with: " + collision.collider.name)
+                if collision.collider.name == "PitCollisionBody":
+                    current_mode = Mode.Falling
+                    fall_position = collision.collider.position
+                    get_node("CollisionArea").set_deferred("disabled", true)
+                    fall_size_adjust = 1
+                    fall_pause = 0
+                else:
+                    bounce_velocity = velocity.bounce(collision.normal)
+                    move_and_slide(bounce_velocity)
+                    bouncing = 10
 
 func get_position():
     return $EnemySprite.position
@@ -89,9 +126,38 @@ func set_path(new_path: Array):
             last_path_target = new_path_target
             path_set = true
     if !path_set:
-        $EnemySprite.play("Thinking")
-        $EnemySprite.scale.x = 0.5 * 0.75
-        $EnemySprite.scale.y = 0.5 * 0.75
+        animate_think()
     
 func needs_path():
     return path == null || path.size() == 0
+
+# All of these animage functions rescale the sprite. This is
+# due to the fact that the sprite sheets themselves are scaled
+# differently (48 and 64 pixels), and the full size is larger
+# than I want, anyhow.
+func animate_right():
+    $EnemySprite.play("Walk Right")
+    # Also update size b/c the sprite sheets don't match.
+    $EnemySprite.scale.x = 0.5
+    $EnemySprite.scale.y = 0.5
+
+func animate_left():
+    $EnemySprite.play("Walk Left")
+    # Also update size b/c the sprite sheets don't match.
+    $EnemySprite.scale.x = 0.5
+    $EnemySprite.scale.y = 0.5
+
+func animate_idle():
+    $EnemySprite.play("Idle")
+    $EnemySprite.scale.x = 0.5 * 0.75
+    $EnemySprite.scale.y = 0.5 * 0.75
+
+func animate_think():
+    $EnemySprite.play("Thinking")
+    $EnemySprite.scale.x = 0.5 * 0.75
+    $EnemySprite.scale.y = 0.5 * 0.75
+
+func animate_fall():
+    $EnemySprite.play("Fall")
+    $EnemySprite.scale.x = 0.5 * 0.75 * fall_size_adjust
+    $EnemySprite.scale.y = 0.5 * 0.75 * fall_size_adjust
