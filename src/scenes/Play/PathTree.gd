@@ -15,8 +15,8 @@ func create_default_graph():
     var node_top = PathNodeType.new(get_node("Path_Top").position)
     var node_top_left = PathNodeType.new(get_node("Path_TopLeft").position)
     var node_fork = PathNodeType.new(get_node("Path_Fork").position)
-    var node_campsite_top = PathNodeType.new(get_node("Path_CampsiteTop").position)
-    var node_campsitee_top_left = PathNodeType.new(get_node("Path_CampsiteTopLeft").position)
+    var node_campsite_top_right = PathNodeType.new(get_node("Path_CampsiteTopRight").position)
+    var node_campsite_top_left = PathNodeType.new(get_node("Path_CampsiteTopLeft").position)
     var node_campsite_bottom_right = PathNodeType.new(get_node("Path_CampsiteBottomRight").position)
     var node_campsite_bottom_left = PathNodeType.new(get_node("Path_CampsiteBottomLeft").position)
     var node_left = PathNodeType.new(get_node("Path_Left").position)
@@ -36,6 +36,35 @@ func create_default_graph():
     node_right_top.children.append(node_top_right)
     node_top_right.children.append(node_top)
     node_top.children.append(node_left)
+    
+    # Several paths go through the fork node. That's why it's a fork.
+    node_right.children.append(node_fork)
+    
+    # Top Path
+    node_fork.children.append(node_top)
+    node_top.children.append(node_top_left)
+    node_top_left.children.append(node_left)
+    
+    # Middle Path
+    node_fork.children.append(node_clearing_top_right)
+    node_clearing_top_right.children.append(node_clearing_top)
+    node_clearing_top.children.append(node_left)
+    
+    # Clearing Path
+    # This branches from the middle path and ultimately goes to the bottom exit.
+    node_clearing_top_right.children.append(node_clearing_left)
+    node_clearing_left.children.append(node_bottom)
+    
+    # Bottom Path
+    node_fork.children.append(node_campsite_top_left)
+    node_campsite_top_left.children.append(node_clearing_center)
+    node_clearing_center.children.append(node_bottom)
+    
+    # Campsite Path
+    node_start.children.append(node_campsite_top_right)
+    node_campsite_top_right.children.append(node_campsite_bottom_right)
+    node_campsite_bottom_right.children.append(node_campsite_bottom_left)
+    node_campsite_bottom_left.children.append(node_bottom)
     
     # Enemies always move offscreen from these two.
     node_left.children.append(node_end_left)

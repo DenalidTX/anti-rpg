@@ -10,7 +10,7 @@
 [ext_resource path="res://scenes/Play/PathTree.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+extents = Vector2( 24, 24 )
 
 [node name="MainScene" type="Node"]
 script = ExtResource( 4 )
@@ -23,6 +23,10 @@ z_index = 1
 [node name="PitCollisionBody" type="StaticBody2D" parent="PitNode"]
 
 [node name="PitCollisionShape" type="CollisionShape2D" parent="PitNode/PitCollisionBody"]
+shape = SubResource( 1 )
+disabled = true
+
+[node name="PitAvoidanceShape" type="CollisionShape2D" parent="PitNode/PitCollisionBody"]
 shape = SubResource( 1 )
 disabled = true
 
@@ -54,14 +58,17 @@ position = Vector2( 208, 16 )
 [node name="Path_Fork" type="Position2D" parent="PathTree"]
 position = Vector2( 680, 257 )
 
-[node name="Path_CampsiteTop" type="Position2D" parent="PathTree"]
-position = Vector2( 780, 416 )
+[node name="Path_CampsiteTopRight" type="Position2D" parent="PathTree"]
+position = Vector2( 773, 450 )
+
+[node name="Path_CampsiteTopLeft" type="Position2D" parent="PathTree"]
+position = Vector2( 576, 400 )
 
 [node name="Path_CampsiteBottomRight" type="Position2D" parent="PathTree"]
-position = Vector2( 752, 562 )
+position = Vector2( 733, 547 )
 
 [node name="Path_CampsiteBottomLeft" type="Position2D" parent="PathTree"]
-position = Vector2( 640, 576 )
+position = Vector2( 642, 560 )
 
 [node name="Path_Left" type="Position2D" parent="PathTree"]
 position = Vector2( 42, 163 )
@@ -84,9 +91,6 @@ position = Vector2( 304, 280 )
 [node name="Path_ClearingLeft" type="Position2D" parent="PathTree"]
 position = Vector2( 64, 400 )
 
-[node name="Path_CampsiteTopLeft" type="Position2D" parent="PathTree"]
-position = Vector2( 576, 400 )
-
 [node name="Path_ClearingCenter" type="Position2D" parent="PathTree"]
 position = Vector2( 320, 416 )
 
@@ -100,6 +104,7 @@ script = ExtResource( 5 )
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 6 )]
 position = Vector2( 780, 268 )
+scale = Vector2( 0.375, 0.375 )
 z_index = 1
 
 [node name="PlacementArea" type="Control" parent="."]

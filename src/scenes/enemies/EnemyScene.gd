@@ -103,10 +103,13 @@ func do_move(delta):
             collision = get_last_slide_collision()
             
             if collision != null:
-                print("Collided with: " + collision.collider.name)
+                # print("Collided with: " + collision.collider.name)
                 if collision.collider.name == "PitCollisionBody":
+                    collision.collider.get_node("PitAvoidanceShape").set_deferred("disabled", false)
                     current_mode = Mode.Falling
-                    fall_position = collision.collider.position
+                    #var collider_parent = collision.collider.get_parent()
+                    #var collider_grandparent = collider_parent.get_parent()
+                    fall_position = collision.collider.get_parent().position
                     get_node("CollisionArea").set_deferred("disabled", true)
                     fall_size_adjust = 1
                     fall_pause = 0
@@ -146,26 +149,26 @@ func needs_path():
 func animate_right():
     $EnemySprite.play("Walk Right")
     # Also update size b/c the sprite sheets don't match.
-    $EnemySprite.scale.x = 0.5
-    $EnemySprite.scale.y = 0.5
+    scale.x = 0.5
+    scale.y = 0.5
 
 func animate_left():
     $EnemySprite.play("Walk Left")
     # Also update size b/c the sprite sheets don't match.
-    $EnemySprite.scale.x = 0.5
-    $EnemySprite.scale.y = 0.5
+    scale.x = 0.5
+    scale.y = 0.5
 
 func animate_idle():
     $EnemySprite.play("Idle")
-    $EnemySprite.scale.x = 0.5 * 0.75
-    $EnemySprite.scale.y = 0.5 * 0.75
+    scale.x = 0.5 * 0.75
+    scale.y = 0.5 * 0.75
 
 func animate_think():
     $EnemySprite.play("Thinking")
-    $EnemySprite.scale.x = 0.5 * 0.75
-    $EnemySprite.scale.y = 0.5 * 0.75
+    scale.x = 0.5 * 0.75
+    scale.y = 0.5 * 0.75
 
 func animate_fall():
     $EnemySprite.play("Fall")
-    $EnemySprite.scale.x = 0.5 * 0.75 * fall_size_adjust
-    $EnemySprite.scale.y = 0.5 * 0.75 * fall_size_adjust
+    scale.x = 0.5 * 0.75 * fall_size_adjust
+    scale.y = 0.5 * 0.75 * fall_size_adjust

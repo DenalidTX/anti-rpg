@@ -37,9 +37,11 @@ func update_paths():
                 var pathing_targets = last_path_target.children
                 if pathing_targets.size() == 0:
                     # TODO: Deactivate
+                    # For now, reset.
+                    enemy.last_path_target = null
                     pass
                 else:
-                    var next_point = rng.randi_range(0, pathing_targets.size()+5)
+                    var next_point = rng.randi_range(0, pathing_targets.size()+1)
                     if next_point < pathing_targets.size():
                         var new_path = enemy_nav.get_simple_path(enemy.position, pathing_targets[next_point].position)
                         enemy.set_next_path_target(pathing_targets[next_point], new_path)

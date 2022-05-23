@@ -63,7 +63,7 @@ func on_start_round():
     active_enemies.append($Enemies/Enemy1)
     
     # Get the navigation overlay for enemy pathfinding.
-    var enemy_nav : Navigation2D = $LevelMap.get_enemy_path_nav()
+    var enemy_nav : Navigation2D = $LevelMap.get_full_nav()
     var path_graph = $PathTree.create_default_graph()
     $EnemyManager.initialize(active_enemies, enemy_nav, path_graph)
 
@@ -73,11 +73,13 @@ func _on_PlacementArea_gui_input(event):
             print("Received placement event.")
             place_mode = PlaceModes.None
             $PitNode.add_child(pit_image)
-            pit_image.rect_position = get_viewport().get_mouse_position()
-            pit_image.rect_position.x -= 24 # Adjust for mouse being centered.
-            pit_image.rect_position.y -= 24 # Adjust for mouse being centered.
+            pit_image.rect_position.x = -24
+            pit_image.rect_position.y = -24
+            $PitNode.position = get_viewport().get_mouse_position()
+            #$PitNode.position.x -= 24 # Adjust for mouse being centered.
+            #$PitNode.position.y -= 24 # Adjust for mouse being centered.
             
             # Add collision box.
-            $PitNode/PitCollisionBody.position = get_viewport().get_mouse_position()
+            #$PitNode/PitCollisionBody.position = get_viewport().get_mouse_position()
             $PitNode/PitCollisionBody/PitCollisionShape.disabled = false
             Input.set_custom_mouse_cursor(null)
