@@ -72,14 +72,14 @@ func _on_PlacementArea_gui_input(event):
         if pit_image != null and place_mode == PlaceModes.PitTrap:
             print("Received placement event.")
             place_mode = PlaceModes.None
-            $PitNode.add_child(pit_image)
+            $PitNode.add_child_below_node($PitNode/PitCollisionBody, pit_image)
             pit_image.rect_position.x = -24
             pit_image.rect_position.y = -24
             $PitNode.position = get_viewport().get_mouse_position()
-            #$PitNode.position.x -= 24 # Adjust for mouse being centered.
-            #$PitNode.position.y -= 24 # Adjust for mouse being centered.
             
             # Add collision box.
-            #$PitNode/PitCollisionBody.position = get_viewport().get_mouse_position()
             $PitNode/PitCollisionBody/PitCollisionShape.disabled = false
             Input.set_custom_mouse_cursor(null)
+            
+            # Show the "cover" that hides the pit.
+            $PitNode/PitCoverNode.visible = true

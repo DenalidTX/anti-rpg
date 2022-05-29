@@ -106,10 +106,10 @@ func do_move(delta):
                 # print("Collided with: " + collision.collider.name)
                 if collision.collider.name == "PitCollisionBody":
                     collision.collider.get_node("PitAvoidanceShape").set_deferred("disabled", false)
+                    collision.collider.get_parent().get_node("PitCoverNode").set_deferred("visible", false)
                     current_mode = Mode.Falling
-                    #var collider_parent = collision.collider.get_parent()
-                    #var collider_grandparent = collider_parent.get_parent()
                     fall_position = collision.collider.get_parent().position
+                    # Importantly, this is the -enemy- collision area, not anything on the map.
                     get_node("CollisionArea").set_deferred("disabled", true)
                     fall_size_adjust = 1
                     fall_pause = 0

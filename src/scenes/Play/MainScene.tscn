@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Play/PlayerSetup.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/map/MainMap.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/enemies/Enemy1.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Play/EnemyManager.gd" type="Script" id=7]
 [ext_resource path="res://scenes/Play/PathTree.gd" type="Script" id=8]
+[ext_resource path="res://scenes/Play/PitCover.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 24 )
@@ -29,6 +30,9 @@ disabled = true
 [node name="PitAvoidanceShape" type="CollisionShape2D" parent="PitNode/PitCollisionBody"]
 shape = SubResource( 1 )
 disabled = true
+
+[node name="PitCoverNode" parent="PitNode" instance=ExtResource( 9 )]
+visible = false
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 76, 37 )
