@@ -85,6 +85,7 @@ func _on_PlacementArea_gui_input(event):
     if event is InputEventMouseButton && event.pressed:
         if placeable_image != null:
             print("Received placement event.")
+            
             if place_mode == PlaceModes.PitTrap:
                 place_mode = PlaceModes.None
                 $PitNode.add_child_below_node($PitNode/PitCollisionBody, placeable_image)
@@ -94,7 +95,31 @@ func _on_PlacementArea_gui_input(event):
                 
                 # Add collision box.
                 $PitNode/PitCollisionBody/PitCollisionShape.disabled = false
+                
+                # Reset the cursor.
                 Input.set_custom_mouse_cursor(null)
                 
                 # Show the "cover" that hides the pit.
                 $PitNode/PitCoverNode.visible = true
+                
+            elif place_mode == PlaceModes.LargeAntlers:
+                place_mode = PlaceModes.None
+                $AntlerPile1Node.position = get_viewport().get_mouse_position()
+                $AntlerPile1Node.visible = true
+                
+                # Add collision box.
+                $AntlerPile1Node/Antler1CollisionBody/AntlerCollisionShape.disabled = false
+                
+                # Reset the cursor.
+                Input.set_custom_mouse_cursor(null)
+                
+            elif place_mode == PlaceModes.SmallAntlers:
+                place_mode = PlaceModes.None
+                $AntlerPile2Node.position = get_viewport().get_mouse_position()
+                $AntlerPile2Node.visible = true
+                
+                # Add collision box.
+                $AntlerPile2Node/Antler2CollisionBody/AntlerCollisionShape.disabled = false
+                
+                # Reset the cursor.
+                Input.set_custom_mouse_cursor(null)

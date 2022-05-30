@@ -47,23 +47,24 @@ visible = false
 [node name="Pile" parent="AntlerPile1Node" instance=ExtResource( 11 )]
 position = Vector2( 0, 5 )
 
-[node name="AntlerCollisionBody" type="StaticBody2D" parent="AntlerPile1Node"]
+[node name="Antler1CollisionBody" type="StaticBody2D" parent="AntlerPile1Node"]
 visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AntlerPile1Node/AntlerCollisionBody"]
+[node name="AntlerCollisionShape" type="CollisionShape2D" parent="AntlerPile1Node/Antler1CollisionBody"]
 position = Vector2( 1, 1 )
 rotation = 1.57079
 shape = SubResource( 2 )
+disabled = true
 
-[node name="AntlerPile1Node2" type="Node2D" parent="."]
+[node name="AntlerPile2Node" type="Node2D" parent="."]
 visible = false
 
-[node name="Pile" parent="AntlerPile1Node2" instance=ExtResource( 10 )]
+[node name="Pile" parent="AntlerPile2Node" instance=ExtResource( 10 )]
 
-[node name="AntlerCollisionBody" type="StaticBody2D" parent="AntlerPile1Node2"]
+[node name="Antler2CollisionBody" type="StaticBody2D" parent="AntlerPile2Node"]
 visible = false
 
-[node name="AntlerCollisionShape" type="CollisionShape2D" parent="AntlerPile1Node2/AntlerCollisionBody"]
+[node name="AntlerCollisionShape" type="CollisionShape2D" parent="AntlerPile2Node/Antler2CollisionBody"]
 position = Vector2( 3.5, -1 )
 shape = SubResource( 1 )
 disabled = true

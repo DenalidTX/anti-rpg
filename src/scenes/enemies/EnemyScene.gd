@@ -4,12 +4,14 @@ extends KinematicBody2D
 var speed = 100
 
 # This differentiates movement from other actions.
-enum Mode {
+enum EnemyMode {
     Normal = 0,
-    Falling = 1,
+    Falling = 1, #Fallingintoa pit.
+    Looting = 2, # Going for a placeable loot item.
+    Returning = 3, # Going back to town.
     Disabled = 999
 }
-var current_mode = Mode.Normal
+var current_mode = EnemyMode.Normal
 
 var fall_position = null
 var fall_size_adjust = 1
@@ -32,9 +34,9 @@ var rng = RandomNumberGenerator.new()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-    if current_mode == Mode.Normal:
+    if current_mode == EnemyMode.Normal:
         do_move(delta)
-    elif current_mode == Mode.Falling:
+    elif current_mode == EnemyMode.Falling:
         animate_fall()
         if position != fall_position:
             var direction = position.direction_to(fall_position)
@@ -51,7 +53,7 @@ func _physics_process(delta):
             fall_size_adjust *= 0.95
         else:
             # TODO: Add score or something.
-            current_mode = Mode.Disabled
+            current_mode = EnemyMode.Disabled
             find_parent("MainScene").get_node("Enemies").remove_child(self)
 
 func do_move(delta):
@@ -107,7 +109,7 @@ func do_move(delta):
                 if collision.collider.name == "PitCollisionBody":
                     collision.collider.get_node("PitAvoidanceShape").set_deferred("disabled", false)
                     collision.collider.get_parent().get_node("PitCoverNode").set_deferred("visible", false)
-                    current_mode = Mode.Falling
+                    current_mode = EnemyMode.Falling
                     fall_position = collision.collider.get_parent().position
                     # Importantly, this is the -enemy- collision area, not anything on the map.
                     get_node("CollisionArea").set_deferred("disabled", true)
