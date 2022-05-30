@@ -42,6 +42,8 @@ func update_paths():
                 # If the enemy already has a loot target, don't interrupt him.
                 pass
             else:
+                enemy.enable_collision()
+                
                 var dist_a1 = -1
                 var node_a1 = get_parent().get_node("AntlerPile1Node")
                 if node_a1.visible == true:
@@ -66,6 +68,7 @@ func update_paths():
                     var last_path_target = enemy.last_path_target
                     if last_path_target == null:
                         enemy.set_position(path_graph_root.position)
+                        enemy.disable_collision()
                         last_path_target = path_graph_root
                         
                     var pathing_targets = last_path_target.children
@@ -73,11 +76,10 @@ func update_paths():
                         # TODO: Deactivate
                         # For now, reset.
                         enemy.last_path_target = null
-                        pass
                     else:
                         var next_point = rng.randi_range(0, pathing_targets.size() * 2)
                         if next_point < pathing_targets.size():
                             var new_path = enemy_nav.get_simple_path(enemy.position, pathing_targets[next_point].position)
-                            enemy.set_next_path_target(pathing_targets[next_point], new_path)
+                            enemy.set_next_path_target(pathing_targets[next_point], new_path, true)
                         else:
                             enemy.animate_think() # There's a chance we'll just idle.

@@ -21,6 +21,10 @@ var fall_pause = 0
 # that the enemy holds state from frame to frame instead of
 # having a separate game state. Probably should change that.
 var path = null
+# This indicates whether the -last- node in the path leaves
+# the visible area. This is important because collision should
+# be disabled only for the boundary collisions.
+var path_leaves = false;
 
 # This prevents us "walking" to where we already are.
 var last_path_target = null
@@ -90,6 +94,12 @@ func do_move(delta):
                 path.remove(0)
                 move_done = true
                 animate_idle()
+                
+                # Disable collisions for the last path segment.
+                # This should only apply when an enemy leaves
+                # the map.
+                if path_leaves and path.size() == 1:
+                    get_node("CollisionArea").disabled = true
             else:
                 velocity = direction * speed
                 
@@ -126,8 +136,9 @@ func get_position():
 func set_position(new_position : Vector2):
     position = new_position
     
-func set_next_path_target(next_path_target, new_path):
+func set_next_path_target(next_path_target, new_path, leaving=false):
     last_path_target = next_path_target
+    path_leaves = leaving
     set_path(new_path)
 
 func set_path(new_path: Array):
@@ -143,6 +154,12 @@ func set_path(new_path: Array):
     
 func needs_path():
     return path == null || path.size() == 0
+    
+func disable_collision():
+    self.get_node("CollisionArea").disabled = true
+    
+func enable_collision():
+    self.get_node("CollisionArea").disabled = false
 
 # All of these animage functions rescale the sprite. This is
 # due to the fact that the sprite sheets themselves are scaled

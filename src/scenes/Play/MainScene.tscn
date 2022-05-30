@@ -77,7 +77,7 @@ z_index = 1
 script = ExtResource( 8 )
 
 [node name="Path_Start" type="Position2D" parent="PathTree"]
-position = Vector2( 785, 273 )
+position = Vector2( 825, 272 )
 
 [node name="Path_Right" type="Position2D" parent="PathTree"]
 position = Vector2( 768, 272 )
@@ -113,13 +113,13 @@ position = Vector2( 642, 560 )
 position = Vector2( 42, 163 )
 
 [node name="Path_EndLeft" type="Position2D" parent="PathTree"]
-position = Vector2( 16, 144 )
+position = Vector2( -16, 133 )
 
 [node name="Path_Bottom" type="Position2D" parent="PathTree"]
 position = Vector2( 432, 584 )
 
 [node name="Path_EndBottom" type="Position2D" parent="PathTree"]
-position = Vector2( 416, 592 )
+position = Vector2( 400, 625 )
 
 [node name="Path_ClearingTopRight" type="Position2D" parent="PathTree"]
 position = Vector2( 464, 336 )

@@ -4,6 +4,21 @@
 [ext_resource path="res://sprites/enemies/Character1-actions.png" type="Texture" id=2]
 [ext_resource path="res://scenes/enemies/EnemyScene.gd" type="Script" id=3]
 
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 48, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 96, 48, 48, 48 )
+
 [sub_resource type="AtlasTexture" id=15]
 flags = 4
 atlas = ExtResource( 2 )
@@ -28,21 +43,6 @@ region = Rect2( 64, 0, 64, 64 )
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 128, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 48, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=12]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 48, 48, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=13]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 96, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
@@ -86,6 +86,11 @@ region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=14]
 animations = [ {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "Walk Left",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
 "name": "Thinking",
@@ -94,11 +99,6 @@ animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
 "loop": true,
 "name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
-"loop": true,
-"name": "Walk Left",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
@@ -133,3 +133,4 @@ playing = true
 visible = false
 position = Vector2( 0, 1 )
 shape = SubResource( 19 )
+disabled = true
