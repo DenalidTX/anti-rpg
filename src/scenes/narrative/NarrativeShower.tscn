@@ -1,0 +1,107 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/allies/animals5_25.png" type="Texture" id=2]
+[ext_resource path="res://sprites/allies/animals5_76.png" type="Texture" id=3]
+[ext_resource path="res://sprites/allies/animals5_30.png" type="Texture" id=4]
+[ext_resource path="res://sprites/enemies/character1-portrait.png" type="Texture" id=5]
+
+[node name="NarrativeBaseNode" type="Node2D"]
+z_index = 10
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 800.0
+margin_bottom = 96.0
+mouse_filter = 2
+color = Color( 0.188235, 0.188235, 0.188235, 0.392157 )
+
+[node name="PlayerLeft" parent="." instance=ExtResource( 1 )]
+visible = false
+position = Vector2( 35, 74 )
+rotation = -3.14159
+scale = Vector2( 5, -5 )
+script = null
+
+[node name="Allies" type="Node2D" parent="."]
+
+[node name="BearLeft" type="Sprite" parent="Allies"]
+visible = false
+position = Vector2( 14, 96 )
+rotation = -0.261799
+scale = Vector2( 5, 5 )
+texture = ExtResource( 3 )
+
+[node name="BearRight" type="Sprite" parent="Allies"]
+visible = false
+position = Vector2( 789, 88 )
+rotation = 0.261799
+scale = Vector2( 5, 5 )
+texture = ExtResource( 3 )
+flip_h = true
+
+[node name="MooseRight" type="Sprite" parent="Allies"]
+visible = false
+position = Vector2( 826, 60 )
+rotation = 3.14159
+scale = Vector2( 5, -5 )
+texture = ExtResource( 4 )
+
+[node name="MooseLeft" type="Sprite" parent="Allies"]
+visible = false
+position = Vector2( -25, 59 )
+rotation = 3.14159
+scale = Vector2( 5, -5 )
+texture = ExtResource( 4 )
+flip_h = true
+
+[node name="DeerRight" type="Sprite" parent="Allies"]
+visible = false
+position = Vector2( 811, 81 )
+rotation = -3.14159
+scale = Vector2( 5, -5 )
+texture = ExtResource( 2 )
+
+[node name="DeerLeft" type="Sprite" parent="Allies"]
+visible = false
+position = Vector2( -1.90735e-06, 80 )
+rotation = -3.14159
+scale = Vector2( 5, -5 )
+texture = ExtResource( 2 )
+flip_h = true
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy1Right" type="Sprite" parent="Enemies"]
+visible = false
+position = Vector2( 872, 96 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="LeftText" type="RichTextLabel" parent="."]
+margin_left = 96.0
+margin_top = 32.0
+margin_right = 608.0
+margin_bottom = 64.0
+bbcode_enabled = true
+scroll_active = false
+
+[node name="RightText" type="RichTextLabel" parent="."]
+margin_left = 192.0
+margin_top = 32.0
+margin_right = 704.0
+margin_bottom = 64.0
+bbcode_enabled = true
+scroll_active = false
+
+[node name="SkipText" type="RichTextLabel" parent="."]
+margin_left = 320.0
+margin_top = 80.0
+margin_right = 480.0
+margin_bottom = 96.0
+bbcode_enabled = true
+bbcode_text = "[center][Space] or click to skip.[/center]"
+text = "[Space] or click to skip."
+scroll_active = false
+__meta__ = {
+"_editor_description_": ""
+}

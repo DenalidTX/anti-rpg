@@ -21,7 +21,7 @@ enum GameMode {
     Editor = 1,
     Playing = 2
 }
-var game_mode = GameMode.Editor
+var game_mode = GameMode.Cutscene
 
 var panel_move_speed = 50
 
@@ -34,7 +34,8 @@ var active_enemies = []
 func _ready():
     # TODO: Use this.
     var path_graph = $PathTree.create_default_graph()
-    pass
+    game_mode = GameMode.Cutscene
+    $NarrativeBaseNode.show_narrative(0)
 
 # Called by controls to set the current ghost image and placeable object.
 func on_pit_selected(event, image):
@@ -60,14 +61,17 @@ func select_placeable(mode, image_path):
                 Vector2(24, 24))
         
 func _process(delta):
-    if game_mode == GameMode.Playing:
+    if game_mode == GameMode.Cutscene:
+        if !$NarrativeBaseNode.showing_narrative():
+            game_mode = GameMode.Editor
+    elif game_mode == GameMode.Editor:
+        if $Control.rect_position.y > control_panel_up_position:
+            $Control.rect_position.y -= (delta * panel_move_speed)
+    elif game_mode == GameMode.Playing:
         if $Control.rect_position.y < control_panel_down_position:
             $Control.rect_position.y += (delta * panel_move_speed)
         # Update paths as needed.
         $EnemyManager.update_paths()
-    elif game_mode == GameMode.Editor:
-        if $Control.rect_position.y > control_panel_up_position:
-            $Control.rect_position.y -= (delta * panel_move_speed)
             
 func on_start_round():
     print("Start!")
