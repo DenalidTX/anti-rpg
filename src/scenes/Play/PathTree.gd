@@ -30,15 +30,17 @@ func create_default_graph():
     
     # Enemies always move here first.
     node_start.children.append(node_right)
+    node_right.children.append(node_fork)
     
     # Top Right Path
-    node_right.children.append(node_right_top)
+    node_fork.children.append(node_right_top)
+    #node_right.children.append(node_right_top)
     node_right_top.children.append(node_top_right)
     node_top_right.children.append(node_top)
     node_top.children.append(node_left)
     
     # Several paths go through the fork node. That's why it's a fork.
-    node_right.children.append(node_fork)
+    # node_right.children.append(node_fork)
     
     # Top Path
     node_fork.children.append(node_top)
@@ -61,7 +63,8 @@ func create_default_graph():
     node_clearing_center.children.append(node_bottom)
     
     # Campsite Path
-    node_start.children.append(node_campsite_top_right)
+    node_fork.children.append(node_campsite_top_right)
+    #node_right.children.append(node_campsite_top_right)
     node_campsite_top_right.children.append(node_campsite_bottom_right)
     node_campsite_bottom_right.children.append(node_campsite_bottom_left)
     node_campsite_bottom_left.children.append(node_bottom)

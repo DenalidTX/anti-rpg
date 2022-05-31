@@ -6,6 +6,7 @@ enum EnemyMode {
     Falling = 1, #Fallingintoa pit.
     Looting = 2, # Going for a placeable loot item.
     Returning = 3, # Going back to town.
+    Entering = 4,
     Disabled = 999
 }
 
@@ -38,11 +39,16 @@ func update_paths():
     
         for enemy in enemies:
             
-            if enemy.current_mode == EnemyMode.Looting || enemy.current_mode == EnemyMode.Returning:
+            if enemy.current_mode == EnemyMode.Looting \
+                or enemy.current_mode == EnemyMode.Returning:
                 # If the enemy already has a loot target, don't interrupt him.
                 pass
             else:
-                enemy.enable_collision()
+                if enemy.position.x > 800 or enemy.position.x < 0 \
+                    or enemy.position.y < 0 or enemy.position.y > 606:
+                    enemy.disable_collision()
+                else:
+                    enemy.enable_collision()
                 
                 var dist_a1 = -1
                 var node_a1 = get_parent().get_node("AntlerPile1Node")
@@ -68,7 +74,6 @@ func update_paths():
                     var last_path_target = enemy.last_path_target
                     if last_path_target == null:
                         enemy.set_position(path_graph_root.position)
-                        enemy.disable_collision()
                         last_path_target = path_graph_root
                         
                     var pathing_targets = last_path_target.children
@@ -80,6 +85,6 @@ func update_paths():
                         var next_point = rng.randi_range(0, pathing_targets.size() * 2)
                         if next_point < pathing_targets.size():
                             var new_path = enemy_nav.get_simple_path(enemy.position, pathing_targets[next_point].position)
-                            enemy.set_next_path_target(pathing_targets[next_point], new_path, true)
+                            enemy.set_next_path_target(pathing_targets[next_point], new_path, false)
                         else:
                             enemy.animate_think() # There's a chance we'll just idle.

@@ -9,9 +9,11 @@ enum EnemyMode {
     Falling = 1, #Fallingintoa pit.
     Looting = 2, # Going for a placeable loot item.
     Returning = 3, # Going back to town.
+    Entering = 4, # Coming into the map.
+    Leaving = 5,
     Disabled = 999
 }
-var current_mode = EnemyMode.Normal
+var current_mode = EnemyMode.Entering
 
 var fall_position = null
 var fall_size_adjust = 1
@@ -38,7 +40,7 @@ var rng = RandomNumberGenerator.new()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-    if current_mode == EnemyMode.Normal:
+    if current_mode == EnemyMode.Normal or current_mode == EnemyMode.Entering:
         do_move(delta)
     elif current_mode == EnemyMode.Falling:
         animate_fall()
@@ -99,7 +101,8 @@ func do_move(delta):
                 # This should only apply when an enemy leaves
                 # the map.
                 if path_leaves and path.size() == 1:
-                    get_node("CollisionArea").disabled = true
+                    current_mode = EnemyMode.Leaving
+                    disable_collision()
             else:
                 velocity = direction * speed
                 
@@ -115,14 +118,14 @@ func do_move(delta):
             collision = get_last_slide_collision()
             
             if collision != null:
-                # print("Collided with: " + collision.collider.name)
+                print("Collided with: " + collision.collider.name)
                 if collision.collider.name == "PitCollisionBody":
                     collision.collider.get_node("PitAvoidanceShape").set_deferred("disabled", false)
                     collision.collider.get_parent().get_node("PitCoverNode").set_deferred("visible", false)
                     current_mode = EnemyMode.Falling
                     fall_position = collision.collider.get_parent().position
                     # Importantly, this is the -enemy- collision area, not anything on the map.
-                    get_node("CollisionArea").set_deferred("disabled", true)
+                    disable_collision()
                     fall_size_adjust = 1
                     fall_pause = 0
                 else:
@@ -156,10 +159,10 @@ func needs_path():
     return path == null || path.size() == 0
     
 func disable_collision():
-    self.get_node("CollisionArea").disabled = true
+    get_node("CollisionArea").set_deferred("disabled", true)
     
 func enable_collision():
-    self.get_node("CollisionArea").disabled = false
+    get_node("CollisionArea").set_deferred("disabled", false)
 
 # All of these animage functions rescale the sprite. This is
 # due to the fact that the sprite sheets themselves are scaled

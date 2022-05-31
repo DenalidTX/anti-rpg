@@ -27,7 +27,6 @@ script = ExtResource( 4 )
 [node name="LevelMap" parent="." instance=ExtResource( 2 )]
 
 [node name="PitNode" type="Node2D" parent="."]
-visible = false
 z_index = 1
 
 [node name="PitCollisionBody" type="StaticBody2D" parent="PitNode"]
@@ -157,9 +156,8 @@ margin_bottom = 544.0
 mouse_filter = 1
 
 [node name="Control" parent="." instance=ExtResource( 1 )]
-visible = false
-margin_top = 32.0
-margin_bottom = 8.0
+margin_top = 123.2
+margin_bottom = 99.2
 
 [node name="NarrativeBaseNode" parent="." instance=ExtResource( 12 )]
 position = Vector2( 0, 512 )

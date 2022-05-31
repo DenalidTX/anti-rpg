@@ -34,7 +34,7 @@ var current_narrative = -1
 var current_line = 0
 
 # Seconds between auto-changing lines.
-var line_delay = 10
+var line_delay = 4
 # Seconds since the last auto-change.
 var current_delay = 0 
 
@@ -45,6 +45,16 @@ func _ready():
     var narrative = []
     narrative.append(line(null, null, Actor.Enemy1, "Ah, my first quest. Level 2, here I come!"))
     narrative.append(line(Actor.Player, "Oh, great, another adventurer.", null, null))
+    narrative.append(line(null, null, Actor.Deer, "Not again! What do they have against us?"))
+    narrative.append(line(Actor.Player, "I've heard them say they just want the 'experience' of killing animals.", null, null))
+    narrative.append(line(null, null, Actor.Deer, "What, really? That's sick."))
+    narrative.append(line(Actor.Player, "Yeah, none of them will even try a skeleton without killing a bear first.", null, null))
+    narrative.append(line(null, null, Actor.Bear, "We noticed, but they are weirdly strong. What can we do?"))
+    narrative.append(line(Actor.Player, "Maybe we can scare them off?", null, null))
+    narrative.append(line(null, null, Actor.Deer, "They aren't scared of bears, and we don't have any skeletons."))
+    narrative.append(line(null, null, Actor.Bear, "What about a trap? I could dig a hole"))
+    narrative.append(line(Actor.Player, "That's an idea. I could cover it with leaves so they don't see it.", null, null))
+    narrative.append(line(Actor.Player, "Let's try it. We just need to pick a good spot.", null, null))
     
     all_narratives.append(narrative)
 
@@ -127,3 +137,8 @@ func hide_all_actors():
     
 func showing_narrative():
     return current_narrative >= 0 and current_narrative < all_narratives.size()
+    
+func _input(event):
+    if Input.is_action_pressed("ui_accept") \
+        or event is InputEventMouseButton && event.pressed:
+        current_delay = line_delay
