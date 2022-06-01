@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/allies/animals5_25.png" type="Texture" id=2]
 [ext_resource path="res://sprites/allies/animals5_76.png" type="Texture" id=3]
 [ext_resource path="res://sprites/allies/animals5_30.png" type="Texture" id=4]
 [ext_resource path="res://sprites/enemies/character1-portrait.png" type="Texture" id=5]
+[ext_resource path="res://sprites/enemies/Character2-portrait.png" type="Texture" id=6]
+[ext_resource path="res://sprites/enemies/Character3-portrait.png" type="Texture" id=7]
+[ext_resource path="res://sprites/enemies/Character6-portrait.png" type="Texture" id=8]
 
 [node name="NarrativeBaseNode" type="Node2D"]
 z_index = 10
@@ -76,6 +79,24 @@ visible = false
 position = Vector2( 872, 96 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
+
+[node name="Enemy2Right" type="Sprite" parent="Enemies"]
+visible = false
+position = Vector2( 871, 96 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="Enemy3Right" type="Sprite" parent="Enemies"]
+visible = false
+position = Vector2( 872, 96 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="Enemy6Right" type="Sprite" parent="Enemies"]
+visible = false
+position = Vector2( 872, 96 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
 
 [node name="LeftText" type="RichTextLabel" parent="."]
 margin_left = 96.0

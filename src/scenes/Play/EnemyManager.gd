@@ -29,8 +29,6 @@ func initialize(enemies, enemy_nav, path_root):
     
     for enemy in enemies:
         enemy.current_mode = EnemyMode.Entering
-        find_parent("MainScene").get_node("Enemies").add_child(enemy)
-        
         enemy.position = path_root.position
 
 func update_paths():

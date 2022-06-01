@@ -10,8 +10,6 @@ enum PlaceModes {
 var place_mode = PlaceModes.None
 var placeable_image = null
 
-var pits_remaining = 1
-
 # These are used to track what the player should be able to do.
 # Cutscene mode means no controls other than skipping.
 # Editor mode lets the player buy and place things.
@@ -38,7 +36,8 @@ func _ready():
     
     # Set up the enemy lists for each level.
     active_enemies.append([$Enemies/Enemy1])
-    active_enemies.append([$Enemies/Enemy1])
+    active_enemies.append([$Enemies/Enemy2, $Enemies/Enemy3])
+    active_enemies.append([$Enemies/Enemy1, $Enemies/Enemy3, $Enemies/Enemy6])
 
     game_mode = GameMode.Cutscene
     $NarrativeBaseNode.show_narrative(current_level)
@@ -76,6 +75,7 @@ func _process(delta):
     elif game_mode == GameMode.Playing:
         
         if $EnemyManager.level_over():
+            reset_placeables()
             current_level += 1
             game_mode = GameMode.Cutscene
             $NarrativeBaseNode.show_narrative(current_level)
@@ -94,6 +94,15 @@ func on_start_round():
     var path_graph = $PathTree.create_default_graph()
     $EnemyManager.initialize(active_enemies[current_level], enemy_nav, path_graph)
 
+func reset_placeables():
+    $PitNode/PitCollisionBody/PitCollisionShape.disabled = false
+    $PitNode/PitCollisionBody/PitAvoidanceShape.disabled = true
+    $PitNode/PitCoverNode.visible = true
+    $PitNode.position = Vector2(-100, -100)
+    
+    $AntlerPile1Node.position = Vector2(-100, -100)
+    $AntlerPile2Node.position = Vector2(-100, -100)
+
 func _on_PlacementArea_gui_input(event):
     if event is InputEventMouseButton && event.pressed:
         if placeable_image != null:
@@ -101,13 +110,7 @@ func _on_PlacementArea_gui_input(event):
             
             if place_mode == PlaceModes.PitTrap:
                 place_mode = PlaceModes.None
-                $PitNode.add_child_below_node($PitNode/PitCollisionBody, placeable_image)
-                placeable_image.rect_position.x = -24
-                placeable_image.rect_position.y = -24
                 $PitNode.position = get_viewport().get_mouse_position()
-                
-                # Add collision box.
-                $PitNode/PitCollisionBody/PitCollisionShape.disabled = false
                 
                 # Reset the cursor.
                 Input.set_custom_mouse_cursor(null)
@@ -118,10 +121,6 @@ func _on_PlacementArea_gui_input(event):
             elif place_mode == PlaceModes.LargeAntlers:
                 place_mode = PlaceModes.None
                 $AntlerPile1Node.position = get_viewport().get_mouse_position()
-                $AntlerPile1Node.visible = true
-                
-                # Add collision box.
-                $AntlerPile1Node/Antler1CollisionBody/AntlerCollisionShape.disabled = false
                 
                 # Reset the cursor.
                 Input.set_custom_mouse_cursor(null)
@@ -129,10 +128,6 @@ func _on_PlacementArea_gui_input(event):
             elif place_mode == PlaceModes.SmallAntlers:
                 place_mode = PlaceModes.None
                 $AntlerPile2Node.position = get_viewport().get_mouse_position()
-                $AntlerPile2Node.visible = true
-                
-                # Add collision box.
-                $AntlerPile2Node/Antler2CollisionBody/AntlerCollisionShape.disabled = false
                 
                 # Reset the cursor.
                 Input.set_custom_mouse_cursor(null)

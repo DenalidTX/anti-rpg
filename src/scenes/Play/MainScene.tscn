@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/Play/PlayerSetup.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/map/MainMap.tscn" type="PackedScene" id=2]
@@ -13,6 +13,10 @@
 [ext_resource path="res://sprites/allies/PileOfAntlers1.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/narrative/NarrativeShower.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/narrative/NarrativeScript.gd" type="Script" id=13]
+[ext_resource path="res://sprites/environment/pit.png" type="Texture" id=14]
+[ext_resource path="res://scenes/enemies/Enemy2.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/enemies/Enemy3.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/enemies/Enemy6.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 18.5, 11 )
@@ -27,6 +31,7 @@ script = ExtResource( 4 )
 [node name="LevelMap" parent="." instance=ExtResource( 2 )]
 
 [node name="PitNode" type="Node2D" parent="."]
+position = Vector2( -100, -100 )
 z_index = 1
 
 [node name="PitCollisionBody" type="StaticBody2D" parent="PitNode"]
@@ -34,23 +39,24 @@ visible = false
 
 [node name="PitCollisionShape" type="CollisionShape2D" parent="PitNode/PitCollisionBody"]
 shape = SubResource( 1 )
-disabled = true
 
 [node name="PitAvoidanceShape" type="CollisionShape2D" parent="PitNode/PitCollisionBody"]
 shape = SubResource( 1 )
 disabled = true
 
+[node name="Pit" type="Sprite" parent="PitNode"]
+texture = ExtResource( 14 )
+
 [node name="PitCoverNode" parent="PitNode" instance=ExtResource( 9 )]
 visible = false
 
 [node name="AntlerPile1Node" type="Node2D" parent="."]
-visible = false
+position = Vector2( -100, -100 )
 
 [node name="Pile" parent="AntlerPile1Node" instance=ExtResource( 11 )]
 position = Vector2( 0, 5 )
 
 [node name="Antler1CollisionBody" type="StaticBody2D" parent="AntlerPile1Node"]
-visible = false
 
 [node name="AntlerCollisionShape" type="CollisionShape2D" parent="AntlerPile1Node/Antler1CollisionBody"]
 position = Vector2( 1, 1 )
@@ -59,7 +65,7 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="AntlerPile2Node" type="Node2D" parent="."]
-visible = false
+position = Vector2( -100, -100 )
 
 [node name="Pile" parent="AntlerPile2Node" instance=ExtResource( 10 )]
 
@@ -146,6 +152,18 @@ script = ExtResource( 5 )
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 6 )]
 position = Vector2( 825, 272 )
 scale = Vector2( 0.375, 0.375 )
+z_index = 1
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 15 )]
+position = Vector2( 896, 272 )
+z_index = 1
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 16 )]
+position = Vector2( 880, 248 )
+z_index = 1
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource( 17 )]
+position = Vector2( 864, 288 )
 z_index = 1
 
 [node name="PlacementArea" type="Control" parent="."]

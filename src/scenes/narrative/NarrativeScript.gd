@@ -5,6 +5,9 @@ extends Node2D
 enum Actor {
     Player,
     Enemy1,
+    Enemy2,
+    Enemy3,
+    Enemy6,
     Bear,
     Deer,
     Moose,
@@ -61,8 +64,8 @@ func _ready():
     all_narratives.append([
         line(Actor.Player, "We got one of them. Maybe the rest will think twice.", null, null),
         line(Actor.Bear, "Don't look now...", null, null),
-        line(null, null, Actor.Enemy1, "Ugh, I hate fetch quests. What does he want with antlers, anyhow?"),
-        line(null, null, Actor.Enemy1, "Dunno, but keep your eyes peeled. The last guy didn't make it out."),
+        line(null, null, Actor.Enemy2, "Ugh, I hate fetch quests. What does he want with antlers, anyhow?"),
+        line(null, null, Actor.Enemy3, "Dunno, but keep your eyes peeled. The last guy didn't make it out."),
         line(Actor.Moose, "Antlers!?! That doesn't sound good.", null, null),
         line(Actor.Player, "Don't animals drop antlers all the time?", null, null),
         line(Actor.Deer, "Yeah, but the adventurers never find those.", null, null),
@@ -129,6 +132,12 @@ func _process(delta):
                     $Allies/DeerRight.visible = true
                 elif narrative.right_actor == Actor.Enemy1:
                     $Enemies/Enemy1Right.visible = true
+                elif narrative.right_actor == Actor.Enemy2:
+                    $Enemies/Enemy2Right.visible = true
+                elif narrative.right_actor == Actor.Enemy3:
+                    $Enemies/Enemy3Right.visible = true
+                elif narrative.right_actor == Actor.Enemy6:
+                    $Enemies/Enemy6Right.visible = true
                 
                 # Increment so that we progress through the list.
                 current_line += 1
@@ -148,6 +157,9 @@ func hide_all_actors():
     $Allies/MooseRight.visible = false
     $Allies/DeerRight.visible = false
     $Enemies/Enemy1Right.visible = false
+    $Enemies/Enemy2Right.visible = false
+    $Enemies/Enemy3Right.visible = false
+    $Enemies/Enemy6Right.visible = false
     
 func showing_narrative():
     return current_narrative >= 0 and current_narrative < all_narratives.size()
