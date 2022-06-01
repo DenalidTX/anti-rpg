@@ -63,5 +63,8 @@ margin_left = 704.0
 margin_top = 40.0
 margin_right = 780.0
 margin_bottom = 60.0
+mouse_filter = 1
 text = "Done!"
 script = ExtResource( 4 )
+
+[connection signal="pressed" from="StartRoundButton" to="StartRoundButton" method="_on_StartRoundButton_pressed"]

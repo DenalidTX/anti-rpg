@@ -41,22 +41,36 @@ var current_delay = 0
 func _ready():
     # Create the narrative lists.
     
-    # First set: Introduce the game.
-    var narrative = []
-    narrative.append(line(null, null, Actor.Enemy1, "Ah, my first quest. Level 2, here I come!"))
-    narrative.append(line(Actor.Player, "Oh, great, another adventurer.", null, null))
-    narrative.append(line(null, null, Actor.Deer, "Not again! What do they have against us?"))
-    narrative.append(line(Actor.Player, "I've heard them say they just want the 'experience' of killing animals.", null, null))
-    narrative.append(line(null, null, Actor.Deer, "What, really? That's sick."))
-    narrative.append(line(Actor.Player, "Yeah, none of them will even try a skeleton without killing a bear first.", null, null))
-    narrative.append(line(null, null, Actor.Bear, "We noticed, but they are weirdly strong. What can we do?"))
-    narrative.append(line(Actor.Player, "Maybe we can scare them off?", null, null))
-    narrative.append(line(null, null, Actor.Deer, "They aren't scared of bears, and we don't have any skeletons."))
-    narrative.append(line(null, null, Actor.Bear, "What about a trap? I could dig a hole"))
-    narrative.append(line(Actor.Player, "That's an idea. I could cover it with leaves so they don't see it.", null, null))
-    narrative.append(line(Actor.Player, "Let's try it. We just need to pick a good spot.", null, null))
+    # First Cutscene: Introduce the game.
+    all_narratives.append([
+        line(null, null, Actor.Enemy1, "Ah, my first quest. Level 2, here I come!"),
+        line(Actor.Player, "Oh, great, another adventurer.", null, null),
+        line(null, null, Actor.Deer, "Not again! What do they have against us?"),
+        line(Actor.Player, "I've heard them say they just want the 'experience' of killing animals.", null, null),
+        line(null, null, Actor.Deer, "What, really? That's sick."),
+        line(Actor.Player, "Yeah, none of them will even try a skeleton without killing a bear first.", null, null),
+        line(null, null, Actor.Bear, "We noticed, but they are weirdly strong. What can we do?"),
+        line(Actor.Player, "Maybe we can scare them off?", null, null),
+        line(null, null, Actor.Deer, "They aren't scared of bears, and we don't have any skeletons."),
+        line(null, null, Actor.Bear, "What about a trap? I could dig a hole"),
+        line(Actor.Player, "That's an idea. I could cover it with leaves so they don't see it.", null, null),
+        line(Actor.Player, "Let's try it. We just need to pick a good spot.", null, null)
+    ])
     
-    all_narratives.append(narrative)
+    # Second Cutscene: More game mechanics
+    all_narratives.append([
+        line(Actor.Player, "We got one of them. Maybe the rest will think twice.", null, null),
+        line(Actor.Bear, "Don't look now...", null, null),
+        line(null, null, Actor.Enemy1, "Ugh, I hate fetch quests. What does he want with antlers, anyhow?"),
+        line(null, null, Actor.Enemy1, "Dunno, but keep your eyes peeled. The last guy didn't make it out."),
+        line(Actor.Moose, "Antlers!?! That doesn't sound good.", null, null),
+        line(Actor.Player, "Don't animals drop antlers all the time?", null, null),
+        line(Actor.Deer, "Yeah, but the adventurers never find those.", null, null),
+        line(Actor.Bear, "Time to dig another pit?", null, null),
+        line(Actor.Player, "Maybe, but why don't we just give them the antlers?", null, null),
+        line(Actor.Moose, "They can have the antlers, but I say we dig the pit, too.", null, null),
+        line(Actor.Deer, "I second that.", null, null),
+    ])
 
 # Show the next set of narrative texts.
 # The index here refers to the literal

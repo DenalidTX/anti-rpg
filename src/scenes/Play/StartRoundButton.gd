@@ -8,6 +8,5 @@ func _ready():
             owner, 
             "on_start_round")
 
-func _gui_input(event):
-    if event is InputEventMouseButton && event.pressed:
-        emit_signal("start_round")
+func _on_StartRoundButton_pressed():
+    emit_signal("start_round")

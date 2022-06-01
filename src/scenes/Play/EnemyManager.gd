@@ -22,15 +22,16 @@ var path_graph_root = null
 func _ready():
     pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-    pass
-
 func initialize(enemies, enemy_nav, path_root):
     self.enemies = enemies
     self.enemy_nav = enemy_nav
     self.path_graph_root = path_root
+    
+    for enemy in enemies:
+        enemy.current_mode = EnemyMode.Entering
+        find_parent("MainScene").get_node("Enemies").add_child(enemy)
+        
+        enemy.position = path_root.position
 
 func update_paths():
     update_delay -= 1
@@ -38,8 +39,10 @@ func update_paths():
         update_delay = 100
     
         for enemy in enemies:
-            
-            if enemy.current_mode == EnemyMode.Looting \
+            if enemy.current_mode == EnemyMode.Disabled:
+                # Disabled enemies are done.
+                pass
+            elif enemy.current_mode == EnemyMode.Looting \
                 or enemy.current_mode == EnemyMode.Returning:
                 # If the enemy already has a loot target, don't interrupt him.
                 pass
@@ -88,3 +91,10 @@ func update_paths():
                             enemy.set_next_path_target(pathing_targets[next_point], new_path, false)
                         else:
                             enemy.animate_think() # There's a chance we'll just idle.
+
+func level_over():
+    var done = true
+    for enemy in enemies:
+        if enemy.current_mode != EnemyMode.Disabled:
+            done = false
+    return done

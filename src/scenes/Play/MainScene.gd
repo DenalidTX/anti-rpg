@@ -28,14 +28,20 @@ var panel_move_speed = 50
 var control_panel_up_position = 512
 var control_panel_down_position = 608
 
+# List of lists, where each list is a level.
 var active_enemies = []
+
+var current_level = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    # TODO: Use this.
-    var path_graph = $PathTree.create_default_graph()
+    
+    # Set up the enemy lists for each level.
+    active_enemies.append([$Enemies/Enemy1])
+    active_enemies.append([$Enemies/Enemy1])
+
     game_mode = GameMode.Cutscene
-    $NarrativeBaseNode.show_narrative(0)
+    $NarrativeBaseNode.show_narrative(current_level)
 
 # Called by controls to set the current ghost image and placeable object.
 func on_pit_selected(event, image):
@@ -68,22 +74,25 @@ func _process(delta):
         if $Control.rect_position.y > control_panel_up_position:
             $Control.rect_position.y -= (delta * panel_move_speed)
     elif game_mode == GameMode.Playing:
-        if $Control.rect_position.y < control_panel_down_position:
-            $Control.rect_position.y += (delta * panel_move_speed)
-        # Update paths as needed.
-        $EnemyManager.update_paths()
-            
+        
+        if $EnemyManager.level_over():
+            current_level += 1
+            game_mode = GameMode.Cutscene
+            $NarrativeBaseNode.show_narrative(current_level)
+        else:
+            if $Control.rect_position.y < control_panel_down_position:
+                $Control.rect_position.y += (delta * panel_move_speed)
+            # Update paths as needed.
+            $EnemyManager.update_paths()
+
 func on_start_round():
     print("Start!")
     game_mode = GameMode.Playing
     
-    # Add an enemy.
-    active_enemies.append($Enemies/Enemy1)
-    
     # Get the navigation overlay for enemy pathfinding.
     var enemy_nav : Navigation2D = $LevelMap.get_full_nav()
     var path_graph = $PathTree.create_default_graph()
-    $EnemyManager.initialize(active_enemies, enemy_nav, path_graph)
+    $EnemyManager.initialize(active_enemies[current_level], enemy_nav, path_graph)
 
 func _on_PlacementArea_gui_input(event):
     if event is InputEventMouseButton && event.pressed:
@@ -127,3 +136,4 @@ func _on_PlacementArea_gui_input(event):
                 
                 # Reset the cursor.
                 Input.set_custom_mouse_cursor(null)
+
