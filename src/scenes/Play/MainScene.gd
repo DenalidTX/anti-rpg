@@ -96,7 +96,7 @@ func on_start_round():
 
 func reset_placeables():
     $PitNode/PitCollisionBody/PitCollisionShape.disabled = false
-    $PitNode/PitCollisionBody/PitAvoidanceShape.disabled = true
+    $PitNode/PitAvoidanceBody/PitAvoidanceShape.disabled = true
     $PitNode/PitCoverNode.visible = true
     $PitNode.position = Vector2(-100, -100)
     

@@ -120,7 +120,8 @@ func do_move(delta):
             if collision != null:
                 print("Collided with: " + collision.collider.name)
                 if collision.collider.name == "PitCollisionBody":
-                    collision.collider.get_node("PitAvoidanceShape").set_deferred("disabled", false)
+                    var avoid_shape = collision.collider.get_parent().get_node("PitAvoidanceBody/PitAvoidanceShape")
+                    avoid_shape.set_deferred("disabled", false)
                     collision.collider.get_parent().get_node("PitCoverNode").set_deferred("visible", false)
                     current_mode = EnemyMode.Falling
                     fall_position = collision.collider.get_parent().position
